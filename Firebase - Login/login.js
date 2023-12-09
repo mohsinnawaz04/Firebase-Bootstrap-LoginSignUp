@@ -1,6 +1,10 @@
 import {
   auth,
   signInWithEmailAndPassword,
+  googleProvider,
+  facebookProvider,
+  githubProvider,
+  signInWithPopup,
 } from "../Firebase/firebaseConfig.js";
 
 var loginForm = document.getElementById("loginForm");
@@ -42,4 +46,58 @@ function handleSubmit(e) {
     .catch((error) => {
       console.error("ERROR: ", error);
     });
+}
+
+// AUTHENTICATION
+
+var googleBtn = document.getElementById("google");
+var facebookBtn = document.getElementById("facebook");
+var githubBtn = document.getElementById("github");
+
+googleBtn.addEventListener("click", authorization);
+facebookBtn.addEventListener("click", authorization);
+githubBtn.addEventListener("click", authorization);
+
+facebookBtn.style.display = "none";
+
+function authorization(e) {
+  if (e.target.parentElement.id === "google") {
+    console.log("google");
+    signInWithPopup(auth, googleProvider)
+      .then((result) => {
+        const user = result.user;
+        localStorage.setItem("user", JSON.stringify(user));
+        window.location.pathname = "/";
+      })
+      .catch((error) => {
+        console.error("ERROR: ", error);
+      });
+    return;
+  }
+  if (e.target.parentElement.id === "facebook") {
+    console.log("facebook");
+    signInWithPopup(auth, facebookProvider)
+      .then((result) => {
+        const user = result.user;
+        localStorage.setItem("user", JSON.stringify(user));
+        window.location.pathname = "/";
+      })
+      .catch((error) => {
+        console.error("ERROR: ", error);
+      });
+    return;
+  }
+  if (e.target.parentElement.id === "github") {
+    console.log("github");
+    signInWithPopup(auth, githubProvider)
+      .then((result) => {
+        const user = result.user;
+        localStorage.setItem("user", JSON.stringify(user));
+        window.location.pathname = "/";
+      })
+      .catch((error) => {
+        console.error("ERROR: ", error);
+      });
+    return;
+  }
 }

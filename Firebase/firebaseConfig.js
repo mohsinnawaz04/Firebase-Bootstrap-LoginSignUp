@@ -7,6 +7,10 @@ import {
   onAuthStateChanged,
   sendPasswordResetEmail,
   sendEmailVerification,
+  GoogleAuthProvider,
+  FacebookAuthProvider,
+  GithubAuthProvider,
+  signInWithPopup,
 } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-auth.js";
 
 import {
@@ -42,7 +46,9 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const auth = getAuth(app);
-
+const googleProvider = new GoogleAuthProvider();
+const facebookProvider = new FacebookAuthProvider();
+const githubProvider = new GithubAuthProvider();
 export {
   db,
   set,
@@ -63,4 +69,8 @@ export {
   onAuthStateChanged,
   sendPasswordResetEmail,
   sendEmailVerification,
+  googleProvider,
+  facebookProvider,
+  githubProvider,
+  signInWithPopup,
 };
